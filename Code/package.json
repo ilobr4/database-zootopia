@@ -1,0 +1,23 @@
+{
+  "name": "datenbank",
+  "version": "1.0.0",
+  "description": "Website with mysql database",
+  "main": "app.js",
+  "author": "Ilona Breidt",
+  "license": "ISC",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-method-override": "^0.0.3",
+    "method-override": "^3.0.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

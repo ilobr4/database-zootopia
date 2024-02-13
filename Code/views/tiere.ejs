@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('./partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Verwaltung unserer Tiere:</h1>
+        <br>
+        <h2><%= tagline %></h2>
+        <div class="container" id="alleTiere">
+            <table id="tiere" border="8" cellspacing="10" cellpadding="20">
+                <tr>
+                    <th>Tier ID</th>
+                    <th>Name</th>
+                    <th>Geburtsdatum</th>
+                    <th>Geschlecht</th>
+                    <th>Größe</th>
+                    <th>Gewicht</th>
+                    <th>Arten ID</th>
+                    <th>Kategorie ID</th>
+                    <th>Gehege Nr.</th>
+                </tr>
+                <% tiere.forEach((tier) => { %>
+                    <tr>
+                        <td><%= tier.tiere_id %></td>
+                        <td><%= tier.tier_name %></td>
+                        <td><%= tier.geburtsdatum %></td>
+                        <td><%= tier.geschlecht %></td>
+                        <td><%= tier.größe %></td>
+                        <td><%= tier.gewicht %></td>
+                        <td><%= tier.arten_id %></td>
+                        <td><%= tier.kategorie_id %></td>
+                        <td><%= tier.gehege_nr %></td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+        <br>
+        <h2>Tier hinzufügen:</h2>
+        <h5>Füllen sie bitte jedes Feld aus.</h5>
+        <form action="/addTier" method="POST">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name1" name="name" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="geburtsdatum">Geburtsdatum:</label>
+            <input type="date" class="form-control" id="geburtsdatum1" name="geburtsdatum" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="geschlecht">Geschlecht:</label>
+            <select class="form-control" id="geschlechtauswahl1" name="geschlechtauswahl" style="width: 300px;">
+              <option value="weiblich">weiblich</option>
+              <option value="männlich">männlich</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="größe">Größe:</label>
+            <input type="number" step="0.0001" class="form-control" id="größe1" name="größe" placeholder="Meter; max. 4 Nachkommastellen" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="gewicht">Gewicht:</label>
+            <input type="number" class="form-control" step="0.0001" id="gewicht1" name="gewicht" placeholder="Kg; max. 4 Nachkommastellen" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="artenID">Arten ID:</label>
+            <input type="number" class="form-control" id="artenID1" name="artenID" placeholder="Ganzzahl" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="kategorieID">Kategorie ID:</label>
+            <input type="number" class="form-control" id="kategorieID1" name="kategorieID" placeholder="Ganzzahl" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="gehegeNr">Gehege Nr.:</label>
+            <input type="number" class="form-control" id="gehegeNr1" name="gehegeNr" placeholder="Ganzzahl" style="width: 300px;">
+          </div>
+          <input type="submit" value="Senden" class="btn btn-secondary">
+        </form>
+        <br>
+
+        <h2>Tierdaten ändern:</h2>
+        <h5>Füllen sie bitte jedes Feld aus.</h5>
+        <form action="/updateTier" method="POST">
+          <div class="form-group">
+            <label for="tierID">Tier ID:</label>
+            <input type="number" class="form-control" id="tierID" name="tierID" placeholder="Ganzzahl" style="width: 300px;">
+            <br>
+            <button type="button" class="btn btn-primary" onclick="fetchTierData()">Felder füllen</button>
+          </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="geburtsdatum">Geburtsdatum:</label>
+            <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="geschlecht">Geschlecht:</label>
+            <select class="form-control" id="geschlechtauswahl" name="geschlechtauswahl" style="width: 300px;">
+              <option value="weiblich">weiblich</option>
+              <option value="männlich">männlich</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="größe">Größe:</label>
+            <input type="number" step="0.0001" class="form-control" id="größe" name="größe" placeholder="Meter; max. 4 Nachkommastellen" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="gewicht">Gewicht:</label>
+            <input type="number" class="form-control" step="0.0001" id="gewicht" name="gewicht" placeholder="Kg; max. 4 Nachkommastellen" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="artenID">Arten ID:</label>
+            <input type="number" class="form-control" id="artenID" name="artenID" placeholder="Ganzzahl" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="kategorieID">Kategorie ID:</label>
+            <input type="number" class="form-control" id="kategorieID" name="kategorieID" placeholder="Ganzzahl" style="width: 300px;">
+          </div>
+          <div class="form-group">
+            <label for="gehegeNr">Gehege Nr.:</label>
+            <input type="number" class="form-control" id="gehegeNr" name="gehegeNr" placeholder="Ganzzahl" style="width: 300px;">
+          </div>
+          <input type="submit" value="Senden" class="btn btn-secondary">
+        </form>
+        <br>
+
+        <h2>Tier löschen:</h2>
+        <form action="/deleteTier" method="POST">
+          <div class="form-group">
+            <label for="tierID">Tier ID:</label>
+            <input type="number" class="form-control" id="tierID" name="tierID" placeholder="Ganzzahl" style="width: 300px;">
+          </div>
+          <input type="submit" value="Senden" class="btn btn-secondary">
+        </form>
+        <script>
+        
+        
+        function fetchTierData() {
+            console.log('Button clicked');
+            const tierID = document.getElementById('tierID').value;
+
+            fetch('/fetchTierData?id=' + tierID)
+                .then(response => response.json())
+                .then(data => {
+                if (data) {
+                    // Format the geburtsdatum value
+                    const geburtsdatum = data.geburtsdatum.substring(0,10);
+                    let parts = geburtsdatum.replace('/-','//');
+                    
+                    // Populate the input fields with the fetched data
+                    document.getElementById('name').defaultValue = data.tier_name;
+                    document.getElementById('geburtsdatum').value = parts;
+                    document.getElementById('geschlechtauswahl').value = data.geschlecht;
+                    document.getElementById('größe').value = data['größe'];
+                    document.getElementById('gewicht').value = data.gewicht;
+                    document.getElementById('artenID').value = data.arten_id;
+                    document.getElementById('kategorieID').value = data.kategorie_id;
+                    document.getElementById('gehegeNr').value = data.gehege_nr;
+                } else {
+                    // Clear the input fields if no data found
+                    document.getElementById('name').value = '';
+                    document.getElementById('geburtsdatum').value = '';
+                    document.getElementById('geschlechtauswahl').value = '';
+                    document.getElementById('größe').value = '';
+                    document.getElementById('gewicht').value = '';
+                    document.getElementById('artenID').value = '';
+                    document.getElementById('kategorieID').value = '';
+                    document.getElementById('gehegeNr').value = '';
+                }
+                })
+                .catch(error => {
+                console.log('Error:', error);
+                });
+}
+
+
+        </script>
+    </div>
+</main>
+
+<footer>
+    <%- include('./partials/footer'); %>
+</footer>
+
+</body>
+</html>

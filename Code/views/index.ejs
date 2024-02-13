@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('./partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Willkommen bei Zootopia!</h1>
+        <br>
+        <h2><%= tagline %></h2>
+            <div class="container">
+                <table id="tier" border="8" cellspacing="10" cellpadding="20">
+                  <tr>
+                    <th>Gehege Nr.</th>
+                    <th>Gehege</th>
+                    <th>Tierart</th>
+                    <th>Anzahl</th>
+                  </tr>
+                  <% tiere.forEach((tier) => { %>
+                    <tr>
+                      <td><%= tier.gehege_nr %></td>
+                      <td><%= tier.Gehege %></td>
+                      <td><%= tier.Tierart %></td>
+                      <td><%= tier.Anzahl %></td>
+                    </tr>
+                  <% }); %>
+                </table>
+                </div>
+    </div>
+</main>
+
+<footer>
+    <%- include('./partials/footer'); %>
+</footer>
+
+</body>
+</html>

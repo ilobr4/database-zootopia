@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('./partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Werde Pate von einem unserer Tiere!</h1>
+        <br>
+        <h2><%= tagline %></h2>
+            <div class="container">
+                <table id="tier" border="8" cellspacing="10" cellpadding="20">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Tierart</th>
+                        <th>Kategorie</th>
+                        <th>Geschlecht</th>
+                        <th>Alter</th>
+                    </tr>
+                    <% tiere.forEach((tier) => { %>
+                        <tr>
+                            <td><%= tier.ID %></td>
+                            <td><%= tier.Name %></td>
+                            <td><%= tier.Tierart %></td>
+                            <td><%= tier.Kategorie %></td>
+                            <td><%= tier.Geschlecht %></td>
+                            <td><%= tier.Alter %></td>
+                        </tr>
+                    <% }); %>
+                </table>
+            </div>
+        <br>
+        <h2>Jetzt Pate werden:</h2>
+        <h5>Füllen sie bitte jedes Feld aus.</h5>
+        <form action="/addPate" method="POST">
+            <div class="form-group">
+                <label for="Vorname">Vorname:</label>
+                <input type="text" class="form-control" id="vorname" name="vorname" style="width: 300px;">
+            </div>
+            <div class="form-group">
+                <label for="Nachname">Nachname:</label>
+                <input type="text" class="form-control" id="nachname" name="nachname" style="width: 300px;">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" style="width: 300px;">
+            </div>
+            <div class="form-group">
+                <label for="tier_id">Tier ID:</label>
+                <input type="number" class="form-control" id="tier_id" name="tier_id" placeholder="Ganzzahl" style="width: 300px;">
+            </div>
+            <div class="form-group">
+                <label for="betrag">Jährlicher Betrag:</label>
+                <input type="number" step="0.01" class="form-control" id="betrag" name="betrag" placeholder="Euro" style="width: 300px;">
+            </div>
+            <input type="submit" value="Senden" class="btn btn-secondary">
+        </form>
+    </div>
+</main>
+
+<footer>
+    <%- include('./partials/footer'); %>
+</footer>
+
+</body>
+</html>
